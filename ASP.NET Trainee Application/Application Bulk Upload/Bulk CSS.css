@@ -1,0 +1,201 @@
+﻿
+    .auto-style1
+
+{
+
+    width: 100%;
+    padding: 5px 5px;
+    margin: 2px 10px 10px 15px;
+}
+
+input[type=text], input[type=password] {
+    width: 15%;
+    padding: 8px 5px;
+    margin: 0 0 0 3px;
+}
+
+.auto-style2 {
+    width: 278px;
+}
+
+.auto-style3 {
+    width: 278px;
+    height: 23px;
+}
+
+.auto-style4 {
+    height: 23px;
+}
+
+.imgcontainer {
+    text-align: left;
+}
+
+.calendar {
+    margin-left: -85px;
+    z-index: 3;
+}
+
+img.avatar {
+    width: 10%;
+    border-radius: 2%;
+}
+
+
+.center-align {
+    text-align: center;
+    margin: 0 0 0 38%;
+    font-size: 15px;
+}
+
+.custom-font {
+    font-family: Serif;
+}
+
+
+.tab {
+    width: 100%;
+    /*overflow: hidden;*/
+    border: 1px solid #ccc;
+    background-color: black;
+}
+
+.val {
+    text-align: left;
+    margin-left: 530px;
+    margin-right: 365px
+}
+
+.tab button {
+    background-color: black;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    color: white;
+}
+
+.headering {
+    border-style: solid;
+    border-color: LightGray;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+.tab button:hover {
+    background-color: black;
+    border-color: aquamarine;
+}
+
+.tab button.active {
+    border: 5px solid tomato;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+
+.tabcontent {
+    padding: 8px 0;
+    margin: 0;
+}
+
+#resultPopup {
+    display: none;
+    position: fixed;
+    left: 41%;
+    top: 30%;
+    background-color: white;
+    width: 15%;
+    height: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+    color: red;
+    border-radius: 3px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 10px 10px;
+    border: 1px solid black;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+.user-count {
+    font-size: 16px;
+    color: black;
+    background-color: aquamarine;
+    padding: 5px 10px;
+    border-radius: 5px;
+    /*display: inline-block;*/
+    text-align: center;
+    margin: 10px 0;
+}
+#popupBackground {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 10%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+#successPopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-bottom:auto;
+    margin-top:auto;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid red;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+#popupBackground1 {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 10%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+.download-button {
+    color: white;
+    border-radius: 5px;
+    margin-left: 6px;
+    background-color: green;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    line-height: 1.5;
+}
+
+    .download-button span {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+
+    .download-button::before {
+        content: url('path/to/excel-logo.png');
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
+        margin-left: -36px;
+    }
+
