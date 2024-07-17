@@ -1,0 +1,160 @@
+﻿@model Application1.Models.RegisterModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration Page</title>
+        <style>
+            body {
+                font-family: sans-serif;
+                background: -webkit-linear-gradient(to right, #155799, #159957);
+                background-image: url("https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2NvbnRlbnQvbHIvcm0yMjJiYXRjaDUta3VsLTM2XzEuanBn.jpg");
+                color: whitesmoke;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            form {
+                width: 20rem;
+                color: whitesmoke;
+                backdrop-filter: blur(16px) saturate(180%);
+                -webkit-backdrop-filter: blur(16px) saturate(180%);
+                background-color: rgba(11, 15, 13, 0.582);
+                border-radius: 12px;
+                margin-left: 1%;
+                border: 1px solid rgba(255, 255, 255, 0.125);
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            input[type=text], input[type=password], input[type=email], input[type=tel], input[type=date] {
+                width: 100%;
+                margin: 10px 0;
+                border-radius: 5px;
+                padding: 6px 5px;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                background-color: #f1f1f1;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                color: #333;
+            }
+
+            select {
+                width: 100%;
+                margin: 10px 0;
+                border-radius: 5px;
+                padding: 6px 5px;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                background-color: #f1f1f1;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                color: #333;
+            }
+
+            button {
+                background-color: tomato;
+                color: white;
+                padding: 1px 2px;
+                border-radius: 5px;
+                margin: 10px 0;
+                margin-left: 80%;
+                width: 20%;
+                font-size: 13px;
+                cursor: pointer;
+                border: none;
+            }
+
+                button:hover {
+                    opacity: 0.8;
+                }
+
+            .validation-summary-errors {
+                color: red;
+                font-family: 'Arial', sans-serif;
+                margin-top: 10px;
+                list-style: none;
+                padding: 0;
+            }
+
+                .validation-summary-errors li {
+                    list-style: none;
+                }
+
+            .field-validation-error {
+                color: red;
+                font-family: 'Courier New', Courier, monospace;
+            }
+        </style>
+    </head>
+    <body>
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "registration-form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h3 style="text-align:center;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Register</h3>
+
+            <div style="font-family:Algerian">
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "Enter First Name" })
+                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "field-validation-error" })
+            </div>
+
+            <div style="font-family:Algerian">
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Enter Last Name" })
+                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "field-validation-error" })
+            </div>
+
+            <div style="font-family:Algerian">
+                @Html.LabelFor(m => m.Gender)
+                @Html.DropDownListFor(m => m.Gender, new SelectList(new[] { "Male", "Female", "Other" }), new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "field-validation-error" })
+            </div>
+
+            <div style="font-family:Algerian">
+                @Html.LabelFor(m => m.DateOfBirth)
+                @Html.TextBoxFor(m => m.DateOfBirth, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "field-validation-error" })
+            </div>
+
+            <div style="font-family:Algerian">
+                @Html.LabelFor(m => m.Username)
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Enter Username" })
+                @Html.ValidationMessageFor(m => m.Username, "", new { @class = "field-validation-error" })
+            </div>
+
+            <div style="font-family:Algerian">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter Password" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "field-validation-error" })
+            </div>
+
+            <div style="font-family:Algerian">
+                @Html.LabelFor(m => m.PhoneNumber)
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "Enter Phone Number" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "field-validation-error" })
+            </div>
+
+            <div style="font-family:Algerian">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter Email" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "field-validation-error" })
+            </div>
+
+            <button type="submit">Register</button>
+
+            @Html.ValidationSummary(true, "", new { @class = "validation-summary-errors" })
+        }
+    </body>
+</html>
+</main>

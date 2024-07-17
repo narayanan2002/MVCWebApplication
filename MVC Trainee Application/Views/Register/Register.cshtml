@@ -1,0 +1,500 @@
+﻿@model IEnumerable<Application1.Models.RegisterModel>
+@{
+    ViewBag.Title = "Register";
+    var h = "/^[a-zA-Z0-9._]+@[a-zA-Z]+\\.[a-zA-Z]{2,}$/";
+}
+
+<main>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration Page</title>
+        <style>
+            button {
+                background-color: tomato;
+                color: white;
+                padding: 6px 7px;
+                border-radius: 5px;
+                margin: 10px 0;
+                margin-left: 50%;
+                font-size: 13px;
+                cursor: pointer;
+                border: none;
+            }
+
+            .fn {
+                margin-left: 40%;
+            }
+
+            .ln {
+                margin-left: 40%;
+            }
+
+            .pn {
+                margin-left: 458px;
+            }
+
+            .em {
+                margin-left: 498px;
+            }
+            .top {
+                margin-top: 10px;
+            }
+
+            #gridService th {
+                border: 2px solid black;
+                padding: 8px;
+                text-align: center;
+                background-color: greenyellow;
+            }
+
+            #gridService td {
+                border: 2px solid black;
+                padding: 8px;
+                text-align: center;
+            }
+
+            .field-validation-error {
+                margin-left: 47%;
+                font-size: 12px;
+                color: red;
+            }
+
+            #editModal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0,0,0);
+                background-color: rgba(0,0,0,0.4);
+            }
+
+            #editModalContent {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 35%;
+            }
+            .e {
+                margin-left: 40%;
+                display:flex;
+                font-size:12px;
+                color:red;
+
+            }
+            .error{
+                text-align:center;
+                margin-left:auto;
+                margin-right:auto;
+            }
+
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+            .f{
+                margin-bottom:8px;
+            }
+
+                .close:hover,
+                .close:focus {
+                    color: black;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <form id="registerForm">
+            <h3 style="text-align:center;">Register</h3>
+            <div>
+                <label for="FirstName" class="fn">First Name</label>
+                <input type="text" id="FirstName" name="FirstName" class="top" placeholder="Enter FirstName" />
+                <span id="FirstNameError" class="field-validation-error"></span>
+            </div>
+            <div>
+                <label for="LastName" class="ln">Last Name</label>
+                <input type="text" id="LastName" name="LastName" class="top" placeholder="Enter LastName" />
+                <span id="LastNameError" class="field-validation-error"></span>
+            </div>
+            <div>
+                <label for="Username" style="margin-left:40%;" class="ln">Username</label>
+                <input type="text" id="Username" name="Username" class="top"  placeholder="Enter Username" />
+                <span id="UsernameError" class="field-validation-error"></span>
+            </div>
+            <div>
+                <label for="PhoneNumber" class="pn">Phone Number</label>
+                <input type="text" id="PhoneNumber" name="PhoneNumber" class="top" placeholder="Enter PhoneNumber" />
+                <span id="PhoneNumberError" class="field-validation-error"></span>
+            </div>
+            <div>
+                <label for="EmailId" class="em">Email Id</label>
+                <input type="text" id="EmailId" name="EmailId" class="top"  placeholder="Enter EmailId" />
+                <span id="EmailIdError" class="field-validation-error"></span>
+            </div>
+            <div>
+                <button type="submit" style="margin-left:55%;height:20px;width:60px;text-align:center;font-size:10px;" id="btnRegister">Register</button>
+                <button type="button" style="height:20px;width:60px;text-align:center;font-size:10px;background-color:blue;" id="btnView">View</button>
+                <br />
+                <span id="LoginError" class="error" style="margin-left:46%;color:green;"></span>
+                <span id="Error" class="error" style="margin-left:46%;display:flex;color:red;"></span>
+
+            </div>
+        </form>
+
+        <table id="gridService" class="grid-view-class" style="margin-left: 30%; margin-top: 20px; border-collapse: collapse;">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+        <div id="editModal">
+            <div id="editModalContent">
+                <form id="editForm">
+                    <h3 style="text-align:center;">Edit</h3>
+                    <div style="text-align:center;">
+                        <input type="hidden" id="EditSNo" name="SNo" />
+                    </div>
+                    <div style="text-align:center;" class="f">
+                        <label for="EditFirstName">First Name</label>
+                        <input type="text" id="EditFirstName" name="FirstName" placeholder="Enter FirstName" />
+                        <span id="EFirstNameError" class="e"></span>
+
+                    </div>
+
+                    <div style="text-align:center;" class="f">
+                        <label for="EditLastName">Last Name</label>
+                        <input type="text" id="EditLastName" name="LastName" placeholder="Enter LastName" />
+                        <span id="ELastNameError" class="e"></span>
+
+                    </div>
+                    <div style="text-align:center;" class="f">
+                        <label for="EditUsername">Username</label>
+                        <input type="text" id="EditUsername" name="Username" placeholder="Enter Username" readonly />
+                        <span id="EUsernameError" class="e"></span>
+
+                    </div>
+
+                    <div style="margin-left:14%" class="f">
+                        <label for="EditPhoneNumber">Phone Number</label>
+                        <input type="text" id="EditPhoneNumber" name="PhoneNumber" placeholder="Enter PhoneNumber" />
+                        <span id="EPhoneNumberError" style="margin-left:30%;font-size:12px;color:red;"></span>
+
+                    </div>
+
+                    <div style="text-align:center;margin-left:10px" class="f">
+                        <label for="EditEmailId">Email Id</label>
+                        <input type="text" id="EditEmailId" name="EmailId" placeholder="Enter EmailId" />
+                        <span id="EEmailIdError" class="e"></span>
+
+                    </div>
+                    <br />
+                    <div style="display: flex;">
+                        <button style="margin-left: 40%;background-color:lawngreen;height:25px;" type="button" id="btnUpdate">Update</button>
+                        <button style="margin-left: 4%; background-color: red; height: 25px; " type="button" id="btnCancel">Cancel</button>
+                        @*<input type="text" id="editId" />*@
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                var editModal = document.getElementById("editModal");
+                var span = document.getElementsByClassName("close")[0];
+
+                $('#btnRegister').click(function (event) {
+                    event.preventDefault();
+                    var isValid = true;
+                    $('#FirstNameError').text('');
+                    $('#LastNameError').text('');
+                    $('#UsernameError').text('');
+
+                    $('#PhoneNumberError').text('');
+                    $('#EmailIdError').text('');
+
+                    var FirstName = $('#FirstName').val();
+                    var LastName = $('#LastName').val();
+                    var PhoneNumber = $('#PhoneNumber').val();
+                    var EmailId = $('#EmailId').val();
+                    var Username = $('#Username').val();
+
+                    var formData = {
+                    FirstName: FirstName,
+                    LastName: LastName,
+                    PhoneNumber: PhoneNumber,
+                    EmailId: EmailId,
+                    Username: Username
+                };
+
+                if (FirstName === '') {
+                    $('#FirstNameError').text('First Name is required');
+                    isValid = false;
+                }
+
+                if (LastName === '') {
+                    $('#LastNameError').text('Last Name is required');
+                    isValid = false;
+                }
+                if (Username === '') {
+                    $('#UsernameError').text('Username is required');
+                    isValid = false;
+                }
+
+
+                var phoneNumberRegex = /^\d{10}$/;
+                if (PhoneNumber === '') {
+                    $('#PhoneNumberError').text('Phone Number is required');
+                    isValid = false;
+                } else if (!phoneNumberRegex.test(PhoneNumber)) {
+                    $('#PhoneNumberError').text('Phone Number is not valid (should be 10 digits)');
+                    isValid = false;
+                }
+
+                var emailRegex =  @h;
+                if (EmailId === '') {
+                    $('#EmailIdError').text('Email ID is required');
+                    isValid = false;
+                } else if (!emailRegex.test(EmailId)) {
+                    $('#EmailIdError').text('Email ID is not valid');
+                    isValid = false;
+                }
+
+
+                if (!isValid) {
+                    return false;
+                }
+
+                    $.ajax({
+                        url: '@Url.Action("Register", "Register")',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: formData,
+                        success: function (response) {
+                            if (response.success) {
+                                $('#LoginError').text("Registration Successfully");
+                                setTimeout(function () {
+                                    $('#LoginError').text('');
+                                }, 3000);
+                                $('#registerForm')[0].reset();
+                            } else {
+                                $('#Error').text(response.message);
+                                setTimeout(function () {
+                                    $('#Error').text('');
+                                }, 3000);
+                               
+                            }
+                        }
+                    });
+                });
+
+                $('#btnView').click(function () {
+                    $.ajax({
+                        url: '@Url.Action("ViewDetails", "Register")',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.success) {
+                                if (response.data.length > 0 && response.data) {
+                                    $('#gridService thead').empty();
+                                    $('#gridService tbody').empty();
+                                    $('#gridService thead').append(`
+                                    <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                    <th>Phone Number</th>
+                                    <th>Email ID</th>
+                                    <th>Action</th>
+                                    </tr>`
+                                    );
+                                    response.data.forEach(item => {
+                                        $('#gridService tbody').append(`
+                                        <tr >
+                                            <td>${item.FirstName}</td>
+                                            <td>${item.LastName}</td>
+                                            <td>${item.Username}</td>
+                                            <td>${item.PhoneNumber}</td>
+                                            <td>${item.EmailId}</td>
+                                            <td style="display: flex;border-top:none;border-left:none;">
+                                            <button class="btnEdit"
+                                                data-sno="${item.SNo}"
+                                                data-firstname="${item.FirstName}"
+                                                data-lastname="${item.LastName}"
+                                                data-username="${item.Username}"
+                                                data-phonenumber="${item.PhoneNumber}"
+                                                data-emailid="${item.EmailId}"
+                                                style="height: 20px; border-radius: 5px; background-color: blue; color: white; width: 50px; margin-left: auto;">
+                                                Edit
+                                               </button>
+                                                <button class="btnDelete" data-sno="${item.SNo}" style="height:20px; border-radius: 5px; background-color:blue; color:white; width:50px;margin-left:4px;">Delete</button>
+                                            </td>
+                                        </tr>`
+                                        );
+                                    });
+                                }
+                                else {
+                                    $('#gridService thead').empty();
+
+                                    $('#gridService tbody').empty();
+                                    $('#gridService tbody').append(`
+                                    <tr>
+                                        <td colspan="4" class="text-center">No data available</td>
+                                    </tr>`);
+                                }
+                                $('.btnEdit').click(function () {
+                                    var obito = $(this);
+                                    $('#EditSNo').val(obito.data('sno'));
+                                    $('#EditFirstName').val(obito.data('firstname'));
+                                    $('#EditLastName').val(obito.data('lastname'));
+                                    $('#EditUsername').val(obito.data('username'));
+                                    $('#EditPhoneNumber').val(obito.data('phonenumber'));
+                                    $('#EditEmailId').val(obito.data('emailid'));
+                                    editModal.style.display = "block";
+                                });
+
+                            
+                                $('.btnDelete').click(function () {
+                                    var sno = $(this).data('sno');
+
+                                    $.ajax({
+                                        url: '@Url.Action("DeleteDetails", "Register")',
+                                        type: 'POST',
+                                        data: {sno},
+                                        dataType: 'json',
+                                        success: function (response) {
+                                            if (response.success) {
+                                                $('#LoginError').text("Deleted Successfully");
+                                                setTimeout(function () {
+                                                    $('#LoginError').text('');
+                                                }, 3000);
+                                                window.scrollTo(0, 0);
+
+                                                $('#btnView').click();
+
+                                            } else {
+                                                $('#Error').text(response.message);
+                                                setTimeout(function () {
+                                                    $('#Error').text('');
+                                                }, 3000);
+                                                window.scrollTo(0, 0);
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                            else
+                            {
+                                $('#Error').text(response.message);
+                                setTimeout(function () {
+                                    $('#Error').text('');
+                                }, 3000);
+                            }
+                        }
+                    });
+                });
+                $('#btnUpdate').click(function () {
+                    var FirstName = $('#EditFirstName').val();
+                    var LastName = $('#EditLastName').val();
+                    var PhoneNumber = $('#EditPhoneNumber').val();
+                    var EmailId = $('#EditEmailId').val();
+                    var formData = {
+                       SNo: $('#EditSNo').val(),
+
+                        FirstName: $('#EditFirstName').val(),
+                        LastName: $('#EditLastName').val(),
+                        PhoneNumber: $('#EditPhoneNumber').val(),
+                        EmailId: $('#EditEmailId').val()
+                    };
+                    var isValid = true;
+                    $('#EFirstNameError').text('');
+                    $('#ELastNameError').text('');
+                    $('#EPhoneNumberError').text('');
+                    $('#EEmailIdError').text('');
+                    if (FirstName === '') {
+                        $('#EFirstNameError').text('First Name is required');
+                        isValid = false;
+                    }
+                    if (LastName === '') {
+                        $('#ELastNameError').text('Last Name is required');
+                        isValid = false;
+                    }
+                    var phoneNumberRegex = /^\d{10}$/;
+                    if (PhoneNumber === '') {
+                        $('#EPhoneNumberError').text('Phone Number is required');
+                        isValid = false;
+                    } else if (!phoneNumberRegex.test(PhoneNumber)) {
+                        $('#EPhoneNumberError').text('Phone Number is not valid (should be 10 digits)');
+                        isValid = false;
+                    }
+                    if (EmailId === '') {
+                        $('#EEmailIdError').text('Email ID is required');
+                        isValid = false;
+                    }
+                    var emailRegex =  @h;
+                    if (EmailId === '') {
+                        $('#EEmailIdError').text('Email ID is required');
+                        isValid = false;
+                    } else if (!emailRegex.test(EmailId)) {
+                        $('#EEmailIdError').text('Email ID is not valid');
+                        isValid = false;
+                    }
+                    if (!isValid) {
+                        return false;
+                    }
+
+                    $.ajax({
+                        url: '@Url.Action("UpdateDetails", "Register")',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: formData,
+                        success: function (response) {
+                            if (response.success) {
+                                $('#LoginError').text("Update Successfully");
+                                setTimeout(function () {
+                                    $('#LoginError').text('');
+                                }, 3000);
+                               
+
+                                editModal.style.display = "none";
+                                $('#editForm')[0].reset();
+                                $('#btnView').click();
+                                window.scrollTo(0, 0);
+
+                            }
+                            else {
+                                $('#editForm')[0].reset();
+                                $('#Error').text(response.message);
+                                setTimeout(function () {
+                                    $('#Error').text('');
+                                }, 3000);
+                                window.scrollTo(0, 0);
+                            }
+                        }
+                    });
+                });
+                $('#btnCancel').click(function () {
+                    $('#editForm')[0].reset();
+                    editModal.style.display = "none";
+                });
+                window.onclick = function(event) {
+                    if (event.target == editModal) {
+                        $('#editForm')[0].reset();
+                        editModal.style.display = "none";
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
+</main>

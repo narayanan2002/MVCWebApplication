@@ -1,0 +1,165 @@
+﻿@model Application1.Models.Class1
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: -webkit-linear-gradient(to right, #155799, #159957);
+            background-image: url("https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0yMjJiYXRjaDUta3VsLTM2XzEuanBn.jpg");
+            color: whitesmoke;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            width: 20rem;
+            color: whitesmoke;
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(11, 15, 13, 0.582);
+            border-radius: 12px;
+            margin-left: 1%;
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            margin: 10px 0;
+            border-radius: 5px;
+            padding: 6px 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: #333;
+        }
+
+        button {
+            background-color: tomato;
+            color: white;
+            padding: 1px 2px;
+            border-radius: 5px;
+            margin: 10px 0;
+            margin-left: 80%;
+            width: 20%;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+        }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #4a92eb;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        .validation-summary-errors {
+            color: tomato;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            margin-top: 10px;
+            list-style: none;
+            padding: 0;
+        }
+
+            .validation-summary-errors li {
+                list-style: none;
+            }
+
+        .field-validation-error {
+            color: tomato;
+            font-family: 'Book Antiqua';
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <form id="loginForm">
+        <h3 style="text-align:center;">Login</h3>
+        <div>
+            <label for="Username">Username</label>
+            <input type="text" id="Username" name="Username" placeholder="Enter Username" class="form-control" />
+            <span id="UsernameError" class="field-validation-error"></span>
+        </div>
+        <br />
+        <div>
+            <label for="Password">Password</label>
+            <input type="password" id="Password" name="Password" placeholder="Enter Password" class="form-control" />
+            <span id="PasswordError" class="field-validation-error"></span>
+        </div>
+        <div>
+            <input type="checkbox" style="margin-left:53%;" id="remember" name="remember">
+            <label for="remember">Remember me</label>
+        </div>
+        <button type="submit" id="btnLogin">Login</button>
+        <div class="validation-summary-errors">
+            <span id="LoginError" class="field-validation-error"></span>
+        </div>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            $('#btnLogin').click(function (event) {
+                event.preventDefault();
+
+                var username = $('#Username').val();
+                var password = $('#Password').val();
+
+                if (username.trim() === '') {
+                    $('#UsernameError').text('Username is required');
+                    return false;
+                } else {
+                    $('#UsernameError').text('');
+                }
+
+                if (password.trim() === '') {
+                    $('#PasswordError').text('Password is required');
+                    return false;
+                } else {
+                    $('#PasswordError').text('');
+                }
+
+                $.ajax({
+                    url: '@Url.Action("Index", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    data:{
+                        Username: username,
+                        Password: password
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = '@Url.Action("Register", "Register")';
+                        } else {
+                            $('#LoginError').text(response.message);
+                        }
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+</html>
