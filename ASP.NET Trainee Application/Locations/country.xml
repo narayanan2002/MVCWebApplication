@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Countries>
+	<Country name="United States" id="101">
+		<State name="California" id="US-01">
+			<City id ="01">Los Angeles</City>
+			<City id ="02">San Francisco</City>
+			<City id ="03">San Diego</City>
+		</State>
+		<State name="New York" id="US-02">
+			<City id ="1">New York City</City>
+			<City id ="2">Buffalo</City>
+			<City id ="3">Rochester</City>
+		</State>
+		<State name="Texas" id="US-03">
+			<City id ="1">Houston</City>
+			<City id ="2">Dallas</City>
+			<City id="3">Austin</City>
+		</State>
+	</Country>
+	<Country name="Canada" id="102">
+		<State name="Ontario" id="CN-01">
+			<City id ="1">Toronto</City>
+			<City id ="2">Ottawa</City>
+			<City id ="3">Hamilton</City>
+		</State>
+		<State name="Quebec" id="CN-02">
+			<City id ="1">Montreal</City>
+			<City id ="2">Quebec City</City>
+			<City id ="3">Laval</City>
+		</State>
+		<State name="British Columbia" id="CN-03">
+			<City id ="1">Vancouver</City>
+			<City id ="2">Victoria</City>
+			<City id ="3">Kelowna</City>
+		</State>
+	</Country>
+	<Country name="Australia" id="103">
+		<State name="New South Wales" id="AU-01">
+			<City id ="1">Sydney</City>
+			<City id ="2">Newcastle</City>
+			<City id ="3">Wollongong</City>
+		</State>
+		<State name="Victoria" id="AU-02">
+			<City id ="1">Melbourne</City>
+			<City id ="2">Geelong</City>
+			<City id ="3">Ballarat</City>
+		</State>
+		<State name="Queensland" id="AU-03">
+			<City id ="1">Brisbane</City>
+			<City id ="2">Gold Coast</City>
+			<City id ="3">Cairns</City>
+		</State>
+	</Country>
+</Countries>
